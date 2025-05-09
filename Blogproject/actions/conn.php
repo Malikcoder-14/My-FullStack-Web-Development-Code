@@ -5,8 +5,9 @@ $conn = new mysqli("localhost",username:"root",password:"",database:"blog-fswd-b
 if ($conn->connect_error) {
 
     die("Connection Failed:". $conn->connect_error);
-    } else {
-        echo "Connected Successfully";    }
+    } else 
+    //{
+      //  echo "Connected Successfully";    }
 
 
     //     $name = "Muddsser Hasnain ";

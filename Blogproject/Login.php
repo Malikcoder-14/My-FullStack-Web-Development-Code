@@ -37,20 +37,22 @@
     <div class="row justify-content-center">
 
       <div class="col-md-6">
-
+ 
         <div class="login-card">
           <h2 class="text-center "> Welcome Back </h2>
           <h2 class="text-center mb-4">Login to your account</h2>
        
-       <?php
+         <?php
+          
           if(isset( $_GET['msg'])) {
-            echo '<div class = "alert alert-danger" role = "alert">' .$_GET['msg']. '</div';
 
+            echo '<div class="alert alert-danger" role="alet">'. $_GET['msg']. '</div>' ;
           }
+       
 
         ?>
            
-          
+                
           <form action="actions/Login_action.php" method="POST">
             <div class="mb-3">
               <label for="loginEmail" class="form-label">Email address</label>
