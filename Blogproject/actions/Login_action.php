@@ -1,7 +1,9 @@
+
 <?php
 
 include_once 'conn.php';
-
+  
+ session_start();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $email = $_POST['email'];
@@ -13,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (empty($email) || empty($password)) {
 
         //  echo "Please fill all fields";
-        $msg = "Please fill all fields";
+        $msg = urlencode("Please fill all fields");
         header("Location: ../Login.php?msg=$msg");
         exit;
     } else {
@@ -36,25 +38,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         echo "<pre>";
 
-        print_r($stmt);
+        echo "Number of rows: " . $stmt->num_rows;
+     //   print_r($stmt);
 
         if ($stmt->num_rows == 1) {
 
             echo "User Found";
-            $stmt->bind_result($id, $name, $hashpassword);
+            $stmt->bind_result($id, $name, $hashed_password);
             $stmt->fetch();
             //    print_r($stmt);
-            if (password_verify($password, $hashpassword)) {
-                echo $name;
+           if (password_verify($password, $hashed_password)) {
+                header("Location: ../Dashboard.php");
+             
+                $_session["id"] = $id;
+                $_SESSION["name"] = $name;
+
             } else {
                 $msg = "Password not matched";
-                header( "Location: ../Login.php?msg=$msg");
+               header("Location: ../Login.php?msg=" . urlencode($msg));
                 exit;
             }
         } else {
 
             $msg = "User not Found";
-            header("Location: ../Login.php?msg = $msg");
+            header("Location: ../Login.php?msg=$msg");
             exit;
 
         }
