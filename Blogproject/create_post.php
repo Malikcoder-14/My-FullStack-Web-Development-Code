@@ -9,6 +9,18 @@ include_once 'header.php';
       <p>This is your dashboard. Use the sidebar to navigate.</p>
     </div>
 
+    <?php 
+    if (isset($_GET['msg'])) { ?>
+
+        <div class = "alert alert-warning" role="role">
+
+                <?php echo $_GET['msg']; ?>
+        </div>
+
+        <?php
+                }
+        ?>
+
     <form action="actions/create_post_action.php" method="POST" enctype="multipart/form-data">
   <div class="container mt-5">
     <div class="row">
